@@ -13,17 +13,23 @@ console.info({ answer });
 
 function Game() {
   const [tentativeGuess, setTentativeGuess] = useState('');
-  const [list, setList] = useState([]);
+  const [guesses, setGuesses] = useState([]);
 
+  function handleSubmitGuess(tentativeGuess) {
+    console.log('received guess: ', tentativeGuess);
+    const next = [...guesses, tentativeGuess];
+    setGuesses(next);
+    setTentativeGuess('');
+    console.log('list: ', next);
+  }
   return (
     <>
+      <GuessResults guesses={guesses} />
       <GuessInput
-          tentativeGuess={tentativeGuess}
-          setTentativeGuess={setTentativeGuess}
-          list={list}
-          setList={setList}
-        />
-      <GuessResults />
+        tentativeGuess={tentativeGuess}
+        setTentativeGuess={setTentativeGuess}
+        handleSubmitGuess={handleSubmitGuess}
+      />
     </>
   );
 }
