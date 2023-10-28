@@ -4,7 +4,6 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
-import { range } from '../../utils';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
