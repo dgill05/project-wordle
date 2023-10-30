@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function GuessInput({ tentativeGuess, setTentativeGuess, handleSubmitGuess }) {
-
   function handleSubmit(e) {
     e.preventDefault();
     console.log('guess: ', tentativeGuess);

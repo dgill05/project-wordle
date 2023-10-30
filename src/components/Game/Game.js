@@ -15,7 +15,6 @@ function Game() {
   const [guesses, setGuesses] = useState([]);
 
   function handleSubmitGuess(tentativeGuess) {
-    console.log('received guess: ', tentativeGuess);
     const next = [...guesses, tentativeGuess];
     setGuesses(next);
     setTentativeGuess('');
@@ -23,7 +22,7 @@ function Game() {
   }
   return (
     <>
-      <GuessResults guesses={guesses} />
+      <GuessResults guesses={guesses} answer={answer}/>
       <GuessInput
         tentativeGuess={tentativeGuess}
         setTentativeGuess={setTentativeGuess}
