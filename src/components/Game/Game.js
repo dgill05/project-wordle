@@ -4,6 +4,10 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
+import WonBanner from '../WonBanner';
+import LostBanner from '../LostBanner';
+
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -11,9 +15,9 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  const [gameStatus, setGameStatus] = useState('running');
   const [tentativeGuess, setTentativeGuess] = useState('');
   const [guesses, setGuesses] = useState([]);
-  const [win, setWin] = useState(false);
 
   function handleSubmitGuess(tentativeGuess) {
     const next = [...guesses, tentativeGuess];
@@ -21,36 +25,33 @@ function Game() {
     setTentativeGuess('');
     console.log('list: ', next);
 
-    if (tentativeGuess === answer && !win) {
-      setWin(true);
+    if (tentativeGuess === answer) {
+      setGameStatus('won');
+    } else if (next.length >= NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus('lost');
     }
   }
 
   return (
     <>
+      {gameStatus}
       <GuessResults guesses={guesses} answer={answer} />
       <GuessInput
-        win={win}
         tentativeGuess={tentativeGuess}
         setTentativeGuess={setTentativeGuess}
         handleSubmitGuess={handleSubmitGuess}
-        guesses={guesses}
+        gameStatus={gameStatus}
       />
-      {win ? (
-        <div className="happy banner">
-          <p>
-            <strong>Congratulations!</strong> Got it in
-            <strong> {guesses.length} guesses</strong>.
-          </p>
-        </div>
-      ) : null}
-      {guesses.length >= 6 ? (
-        <div className="sad banner">
-          <p>
-            Sorry, the correct answer is <strong>{answer}</strong>.
-          </p>
-        </div>
-      ) : null}
+      {gameStatus === 'won' && (
+        <WonBanner
+          numOfGuesses={guesses.length}
+        />
+      )}
+      {gameStatus === 'lost' && (
+        <LostBanner
+          answer={answer}
+        />
+      )}
     </>
   );
 }

@@ -4,8 +4,7 @@ function GuessInput({
   tentativeGuess,
   setTentativeGuess,
   handleSubmitGuess,
-  win,
-  guesses,
+  gameStatus,
 }) {
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,13 +21,13 @@ function GuessInput({
         </label>
         <input
           required
+          disabled={gameStatus !== 'running'}
           id="guess-input"
           type="text"
           maxLength="5"
           minLength="5"
           pattern="[a-zA-Z]{5}"
           title="Please enter up to 5 numbers."
-          disabled={win || guesses.length >= 6}
           value={tentativeGuess}
           onChange={(e) => {
             const nextGuess = e.target.value.toUpperCase();
