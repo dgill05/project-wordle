@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function GuessInput({ tentativeGuess, setTentativeGuess, handleSubmitGuess }) {
+function GuessInput({
+  tentativeGuess,
+  setTentativeGuess,
+  handleSubmitGuess,
+  win,
+  guesses,
+}) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log('guess: ', tentativeGuess);
@@ -22,6 +28,7 @@ function GuessInput({ tentativeGuess, setTentativeGuess, handleSubmitGuess }) {
           minLength="5"
           pattern="[a-zA-Z]{5}"
           title="Please enter up to 5 numbers."
+          disabled={win || guesses.length >= 6}
           value={tentativeGuess}
           onChange={(e) => {
             const nextGuess = e.target.value.toUpperCase();
