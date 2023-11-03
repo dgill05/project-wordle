@@ -119,7 +119,7 @@ h1 {
 }
 
 .row span {
- flex: 1; /* Let the spans equally share the available space */
+  flex: 1; /* Let the spans equally share the available space */
   display: flex;
   align-items: center;
   justify-content: center;
