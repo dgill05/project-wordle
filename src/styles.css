@@ -107,6 +107,48 @@ h1 {
   font-size: 2rem;
 }
 
+.keyboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.row span {
+ flex: 1; /* Let the spans equally share the available space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.row span:hover {
+  background-color: lightgray;
+}
+
+.row span.correct {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+.row span.incorrect {
+  background: var(--color-gray-300);
+  border-color: var(--color-gray-300);
+  color: white;
+}
+.row span.misplaced {
+  background: var(--color-warning);
+  border-color: var(--color-warning);
+  color: white;
+}
+
 /*
   Round the corners for the 4 cells at the very corners of
   the game board
@@ -195,7 +237,6 @@ h1 {
   padding: 0;
   border: 0;
 }
-
 /*
   Modal styles
 
